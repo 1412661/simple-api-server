@@ -1,0 +1,136 @@
+body {
+	font-family: "Sentinel SSm A", "Sentinel SSm B";
+	font-size: 18px;
+	line-height: 1.65;
+	color: gray;
+}
+.container { 
+	width: 960px;
+	margin: 0 auto;
+}
+header { height: 80px; }
+header #logo { 
+	font-size: 20px;
+	float: left; 
+}
+header #logo img { width: 200px; height: 40px; }
+
+
+#menu { float: right; }
+#menu ul > li { list-style-type: none; display: inline-block;}
+#menu ul > li a { color: gray; padding-left: 20px; }
+
+#content article { width: 320px; padding: 20px; float: left; box-sizing: border-box; }
+#content article a { text-decoration: none; color: gray; }
+#content article img { border: 1px solid #ddd; height: 150px; width: 100%; }
+#content article h2 { font-size: 20px; }
+
+footer { text-align: center; }
+
+
+.services #content article { width: 100%; height: auto; }
+#comment textarea[name=comment]{
+	width: 100%;
+	display: block;
+	box-sizing: border-box;
+	padding: 10px;
+}
+#comment h2{
+	margin-bottom: 10px;
+}
+#comment .count-comment{
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+	border-bottom: 1px dotted;
+}
+
+#comment .group-submit{
+	border: 1px solid rgb(169, 169,169);
+	border-top-width: 0;
+	background: #f9f9f9;
+	text-align: right;
+	padding: 10px;
+}
+
+#comment .avatar{
+	width: 31px;
+	height: 31px;
+	display: inline-block;
+	margin-right: 10px;
+}
+#comment input[type=submit]{
+	padding: 8px 10px;
+	border: none;
+	background: #1bc3a4;
+	color: #fff;
+	float: right;
+	cursor: pointer;
+}
+#comment .comment-detail{
+	clear: both;
+	padding: 20px;
+	border-bottom: 1px dotted rgb(169, 169,169);
+	overflow: auto;
+	position: relative;
+}
+#comment .comment-detail .avatar{
+	float: left;
+	width: 50px;
+	height: 50px;
+}
+#comment .comment-detail .username{
+	color: #1730b3;
+}
+#comment .comment-detail .time-post{
+	float: right;
+	font-size: 12px;
+}
+#comment .comment-detail p {
+	margin: 0;
+	font-size: 14px;
+}
+
+#comment .comment-detail .overflow {
+	position: absolute;
+	background: rgba(0,0,0,0.1);
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	transform: rotateY(90deg);
+	transition: all 0.3s ease;
+}
+#comment .comment-detail .delete{
+	color: red;
+	padding: 0 5px;
+	font-size: 16px;
+	position: absolute;
+	right: 5px;
+	top: 0px;
+	cursor: pointer;
+}
+#comment .comment-detail:hover .overflow{
+	transform: rotateY(0deg);
+}
+#comment .pagination{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#comment .pagination-page-number{
+	text-align: center;
+}
+#comment .pagination-page-number span{
+	cursor: pointer;
+	padding: 5px;
+	margin-right: 5px;
+	background: #1bc3a4;
+	color: #fff;
+}
+#comment .pagination span.prev{
+	float: left;
+	color: #1bc3a4;
+}
+#comment .pagination span.next{
+	float: right;
+	color: #1bc3a4;
+}
