@@ -9,10 +9,10 @@ module.exports = function(app) {
 		res.render('index');
 	});
 
-	app.get('/services/:slug', function(req, res){
+	app.get('/service/:slug', function(req, res){
 		var dataService = dao.getService(req.params.slug);
-		var comments = dao.getComment(req.params.slug, 0, 9);
-		res.render('service', {dataService: dataService, comments: comments});
+		var comments = dao.getComment(req.params.slug, 0, 2);
+		res.render('service', {dataService: dataService, comments: comments, posComment: {start: 0, sizeDisComm: 3}});
 	});
 
 

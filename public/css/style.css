@@ -126,6 +126,7 @@ footer { text-align: center; }
 	background: #1bc3a4;
 	color: #fff;
 }
+#comment .pagination-page-number span.active { background: #167967; }
 #comment .pagination span.prev{
 	float: left;
 	color: #1bc3a4;
