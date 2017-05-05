@@ -47,5 +47,11 @@ var dao = {
 		});
 	},
 
+
+	/* input the required method */
+
+
+	/* end input the required method */
+
 };
 module.exports = dao;

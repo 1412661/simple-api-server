@@ -1,8 +1,21 @@
 module.exports = function(app) {
 	var dao = require('../database/dao.js');
 	dao.connect();
-	dao.getCol("table", { item: "12345"} );
-	//dao.insertCol("table", {item: String}, {item: "12345", number: 1234});
-	//console.log(data);
+
+
+
+
+	app.get('/', function(req, res){
+		res.render('index');
+	});
+
+	app.get('/services/:slug', function(req, res){
+		var dataService = dao.getService()
+	});
+
+
+
+
+
 	dao.close();
 }
