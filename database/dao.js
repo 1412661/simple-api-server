@@ -48,7 +48,26 @@ var dao = {
 	},
 
 
-	/* input the required method */
+	/* input the required method from controler*/
+
+	/*
+	*	in - slug: primary key của bảng services
+	*	out: {slug:String, pathImg: String, detail: String}
+	*/
+	getService: function(slug){
+		return {}
+	}
+
+	/*
+	*	in - slug: string
+	*	in - startComment, endComment	-> hiển thị comment từ startComment đến endComment (bắt đầu là 0)
+	*	out - [{id:String, pathAvatar: String, username: String, datePost: String, content: String}, 
+	*		{id:String, pathAvatar: String, username: String, datePost: String, content:String}]
+	*/
+	getComment: function(slug, startComment, endComment){
+
+	}
+
 
 
 	/* end input the required method */
