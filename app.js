@@ -1,7 +1,7 @@
-var express = require('express'),
-	app = express(),
-	bodyParser = require('body-parser'),
-	controller = require('./controller/controller.js');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var	controller = require('./controller/controller');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -14,5 +14,5 @@ controller(app);
 
 // Server
 app.listen(3000, function(){
-	console.log("localhost:3000");
+	console.log("[INFO] Server started at localhost:3000");
 });

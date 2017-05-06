@@ -2,9 +2,6 @@ module.exports = function(app) {
 	var dao = require('../database/dao.js');
 	dao.connect();
 
-
-
-
 	app.get('/', function(req, res){
 		res.render('index');
 	});
@@ -25,12 +22,8 @@ module.exports = function(app) {
 		res.render('service', {dataService: dataService, comments: comments, posComment: {start: startComment, countComment: countComment}});
 	});
 
-
-
-
-
 	app.get('*', function(req, res){
-		res.send('ERROR 404', 404);	
+		res.send('ERROR 404', 404);
 	});
 
 

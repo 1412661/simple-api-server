@@ -2,13 +2,22 @@ var dao = {
 	mongoose: require('mongoose'),
 	connString: "mongodb://nvh_user:123456@ds131511.mlab.com:31511/nvh_test",
 
-	connect: function(){
+	connect: function()
+	{
 		this.mongoose.connect(this.connString);
+
+		var db = this.mongoose.connection;
+		db.on('error', console.error.bind(console, 'Error when connection to MongoDB:'));
+		db.once('open', function(){
+				console.log('[INFO] Connected to MongoDB at ds131511.mlab.com:31511/nvh_test');
+		});
 	},
 
-	close: function(){
+	close: function()
+	{
 		this.mongoose.connection.close();
 	},
+
 	/*
 	*	In - table: String
 	*	In - struct: json	-> cấu trúc của data {keydata: type,...}
@@ -62,7 +71,7 @@ var dao = {
 	/*
 	*	in - slug: string
 	*	in - startComment, endComment	-> hiển thị sizeDisComm comment từ startComment (bắt đầu là 0)
-	*	out - {count: Int, [{id:String, pathAvatar: String, username: String, datePost: String, content: String}, 
+	*	out - {count: Int, [{id:String, pathAvatar: String, username: String, datePost: String, content: String},
 	*		{id:String, pathAvatar: String, username: String, datePost: String, content:String}]}
 	*	out - return null nếu không có kết quả
 	*/
@@ -74,9 +83,6 @@ var dao = {
 		]};
 	}
 
-
-
-	/* end input the required method */
-
 };
+
 module.exports = dao;
