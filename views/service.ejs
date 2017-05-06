@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Nhóm 10 - 1412170 - 1412209 - 1412661</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body class="services">
+	<div class="container">
+		<header>
+			<div id="logo">
+				<img src="/images/logo.png">
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="#">Chat</a></li>
+					<li><a href="services.html">Services</a></li>
+				</ul>
+			</div>
+		</header>
+
+		<hr>
+
+		<div id="banner">
+			<h1><%= dataService.title %></h1>
+		</div>
+
+		<hr>
+
+		<div id="content">
+			<article>
+				<img src="<%= dataService.pathImg %>">	
+				<p><%= dataService.detail %></p>
+			</article>
+			
+		</div>
+
+		<hr>
+
+		<div id="comment">
+			<h2>Bình luận</h2>
+			<div class="count-comment"><span><%= comments.count %> bình luận</span></div>
+			<form class="comment-box" action="/comment" method="post">
+				<textarea name="comment" placeholder="Add a comment..."></textarea>
+				<div class="group-submit">
+					<img class="avatar" src="/images/avatar.jpg">
+					<input type="submit" value="comment">
+				</div>
+			</form>
+			<% comments.comments.forEach(function(item){ %>
+				<div class="comment-detail">
+					<img class="avatar" src="<%= item.pathAvatar %>">
+					<span class="username"><%= item.username %></span>
+					<span class="time-post"><%= item.datePost %></span>
+					<p><%= item.content %></p>
+					<div class="overflow">
+						<div class="delete" data-id="<%= item.id %>">X</div>
+					</div>
+				</div>
+			<% }); %>
+
+			<div class="pagination">
+				<% 
+					var count = comments.count;
+					var start = posComment.start;
+					var sizeDisComm = posComment.sizeDisComm;
+					var countPage = Math.floor((count-1)/sizeDisComm) + 1;
+					var pageActive = Math.floor(start/sizeDisComm) + 1;
+					var pageStart = (pageActive > 2) ? (pageActive - 2) : 1;
+					var pageEnd = (countPage - pageActive > 2) ? pageActive + 2 : countPage;
+				%>
+				<% if (pageActive > 1) { %>
+					<a href="/service/<%= dataService.slug + '?pagecomment=' +  (pageActive-1); %>"><span class="prev">Previous</span></a>
+				<% } %>
+				<% if (countPage - pageActive > 0) { %>
+					<a href="/service/<%= dataService.slug + '?pagecomment=' +  (pageActive+1); %>"><span class="next">Next</span></a>
+				<% } %>
+				<div class="pagination-page-number">
+ 					<% if (pageActive > 3) { %>
+						<span>...</span>
+ 					<% } %>
+					<% for(i = pageStart; i <= pageEnd; i++){ %>
+						<span data-page="<%= i %>" <%= (pageActive==i) ? "class=active" : "";  %>>
+							<a href="/service/<%= dataService.slug + '?pagecomment=' +  i; %>">
+								<%= i %>
+							</a>
+						</span>
+					<% } %>
+					<% if (countPage - pageActive > 2) { %>
+						<span>...</span>
+					<% } %>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+
+		<footer>
+			<p>Copyright &copy 2017 by nhóm 10</p>
+		</footer>
+	</div>
+</body>
+</html>

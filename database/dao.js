@@ -53,9 +53,10 @@ var dao = {
 	/*
 	*	in - slug: primary key của bảng services
 	*	out: {slug:String, title: String, pathImg: String, detail: String}
+	*	out - return null nếu không có kết quả
 	*/
 	getService: function(slug){
-		return {slug: "design-research", title: "Design Research", pathImg: "/images/design.jpg", detail: "We help you better understand the needs and goals of your customers, uncovering key insighs that drive innovative design ideas" };
+		return {slug: "design", title: "Design Research", pathImg: "/images/design.jpg", detail: "We help you better understand the needs and goals of your customers, uncovering key insighs that drive innovative design ideas" };
 	},
 
 	/*
@@ -63,6 +64,7 @@ var dao = {
 	*	in - startComment, endComment	-> hiển thị sizeDisComm comment từ startComment (bắt đầu là 0)
 	*	out - {count: Int, [{id:String, pathAvatar: String, username: String, datePost: String, content: String}, 
 	*		{id:String, pathAvatar: String, username: String, datePost: String, content:String}]}
+	*	out - return null nếu không có kết quả
 	*/
 	getComment: function(slug, startComment, sizeDisComm){
 		return {count: 20, comments: [

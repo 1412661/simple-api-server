@@ -10,9 +10,19 @@ module.exports = function(app) {
 	});
 
 	app.get('/service/:slug', function(req, res){
+		var pageComment = (req.query.pagecomment) ? req.query.pagecomment : 1;
+		var countComment = (req.query.countcomment) ? req.query.countcomment : 5;
+		var startComment = countComment * (pageComment-1);
+
 		var dataService = dao.getService(req.params.slug);
-		var comments = dao.getComment(req.params.slug, 0, 2);
-		res.render('service', {dataService: dataService, comments: comments, posComment: {start: 0, sizeDisComm: 3}});
+		if (dataService == null)
+			res.send("ERROR 404", 404);
+
+		var comments = dao.getComment(req.params.slug, startComment, countComment);
+		if (comments == null)
+			res.send("ERROR 404", 404);
+
+		res.render('service', {dataService: dataService, comments: comments, posComment: {start: startComment, sizeDisComm: countComment}});
 	});
 
 
@@ -20,7 +30,7 @@ module.exports = function(app) {
 
 
 	app.get('*', function(req, res){
-		res.send('ERROR 404', 404);
+		res.send('ERROR 404', 404);	
 	});
 
 
