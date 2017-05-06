@@ -67,7 +67,7 @@ var dao = {
 	*	out - return null nếu không có kết quả
 	*/
 	getComment: function(slug, startComment, sizeDisComm){
-		return {count: 20, comments: [
+		return {total: 20, comments: [
 			{id: 0, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:00 05/05/2017", content: "This is good article"},
 			{id: 1, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:01 05/05/2017", content: "This is good article"},
 			{id: 2, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:02 05/05/2017", content: "This is good article"}

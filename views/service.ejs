@@ -40,7 +40,7 @@
 
 		<div id="comment">
 			<h2>Bình luận</h2>
-			<div class="count-comment"><span><%= comments.count %> bình luận</span></div>
+			<div class="count-comment"><span><%= comments.total %> bình luận</span></div>
 			<form class="comment-box" action="/comment" method="post">
 				<textarea name="comment" placeholder="Add a comment..."></textarea>
 				<div class="group-submit">
@@ -62,11 +62,11 @@
 
 			<div class="pagination">
 				<% 
-					var count = comments.count;
+					var totalComment = comments.total;
 					var start = posComment.start;
-					var sizeDisComm = posComment.sizeDisComm;
-					var countPage = Math.floor((count-1)/sizeDisComm) + 1;
-					var pageActive = Math.floor(start/sizeDisComm) + 1;
+					var countComment = posComment.countComment;
+					var countPage = Math.floor((totalComment-1)/countComment) + 1;
+					var pageActive = Math.floor(start/countComment) + 1;
 					var pageStart = (pageActive > 2) ? (pageActive - 2) : 1;
 					var pageEnd = (countPage - pageActive > 2) ? pageActive + 2 : countPage;
 				%>
@@ -76,19 +76,30 @@
 				<% if (countPage - pageActive > 0) { %>
 					<a href="/service/<%= dataService.slug + '?pagecomment=' +  (pageActive+1); %>"><span class="next">Next</span></a>
 				<% } %>
+
 				<div class="pagination-page-number">
  					<% if (pageActive > 3) { %>
+ 						<span data-page="1">
+							<a href="/service/<%= dataService.slug + '?pagecomment=1&countcomment=' + posComment.countComment; %>">
+								1
+							</a>
+						</span>
 						<span>...</span>
  					<% } %>
 					<% for(i = pageStart; i <= pageEnd; i++){ %>
 						<span data-page="<%= i %>" <%= (pageActive==i) ? "class=active" : "";  %>>
-							<a href="/service/<%= dataService.slug + '?pagecomment=' +  i; %>">
+							<a href="/service/<%= dataService.slug + '?pagecomment=' +  i + '&countcomment=' + posComment.countComment; %>">
 								<%= i %>
 							</a>
 						</span>
 					<% } %>
 					<% if (countPage - pageActive > 2) { %>
 						<span>...</span>
+ 						<span data-page="<%= countPage %>">
+							<a href="/service/<%= dataService.slug + '?pagecomment=' + countPage + '&countcomment=' + posComment.countComment; %>">
+								<%= countPage %>
+							</a>
+						</span>
 					<% } %>
 				</div>
 			</div>

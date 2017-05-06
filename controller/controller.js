@@ -22,7 +22,7 @@ module.exports = function(app) {
 		if (comments == null)
 			res.send("ERROR 404", 404);
 
-		res.render('service', {dataService: dataService, comments: comments, posComment: {start: startComment, sizeDisComm: countComment}});
+		res.render('service', {dataService: dataService, comments: comments, posComment: {start: startComment, countComment: countComment}});
 	});
 
 
