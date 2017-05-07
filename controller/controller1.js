@@ -1,7 +1,7 @@
 module.exports = function(app) {
-	var dao = require('../database/dao');
+	var dao = require('../database/dao1');
 
-	
+
 
 	app.get('/', function(req, res){
 		res.render('index');
@@ -41,5 +41,5 @@ module.exports = function(app) {
 	});
 
 
-	
+
 }

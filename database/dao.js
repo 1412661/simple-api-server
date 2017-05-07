@@ -20,9 +20,11 @@ var dao = {
 
 		this.mongoose.connection.on('error', console.error.bind(console, 'Error when connection to MongoDB:'));
 		this.mongoose.connection.once('open', function(){
+			// Wait until you see this line in the console.
 			console.log('[INFO] Connected to MongoDB simple-api-server with user quocbao');
 		});
 
+		// DB structure
 		var PageSchema = new this.mongoose.Schema({
 			slug : String,
 			title: String,
@@ -36,7 +38,8 @@ var dao = {
 			pathAvatar: String,
 			username: String,
 			datePost: String,
-			content: String});
+			content: String
+		});
 		this.Comment = this.mongoose.model('Comment', CommentSchema);
 	},
 
