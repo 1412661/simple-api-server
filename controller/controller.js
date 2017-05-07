@@ -14,12 +14,16 @@ module.exports = function(app) {
 		var startComment = countComment * (pageComment-1);
 
 		var dataService = dao.getService(req.params.slug);
-		if (dataService == null)
-			res.send("ERROR 404", 404);
+		if (dataService == null){
+			res.writeHead(404, {"Content-Type": "text/html"});
+			res.end();
+		}
 
 		var comments = dao.getComment(req.params.slug, startComment, countComment);
-		if (comments == null)
-			res.send("ERROR 404", 404);
+		if (comments == null){
+			res.writeHead(404, {"Content-Type": "text/html"});
+			res.end();
+		}
 
 		res.render('service', {dataService: dataService, comments: comments, posComment: {start: startComment, countComment: countComment}});
 	});
