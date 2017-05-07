@@ -1,5 +1,7 @@
 module.exports = function(app) {
-	var dao = require('../database/dao.js');
+	var dao = require('../database/dao');
+
+	// Open connection to MongoDB server
 	dao.connect();
 
 	app.get('/', function(req, res){
@@ -23,9 +25,11 @@ module.exports = function(app) {
 	});
 
 	app.get('*', function(req, res){
-		res.send('ERROR 404', 404);
+		res.writeHead(404, {"Content-Type": "text/html"});
+		res.end();
 	});
 
 
+	// Close connection to MongoDB server
 	dao.close();
 }
