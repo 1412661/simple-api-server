@@ -1,6 +1,15 @@
 var dao = {
 	mongoose: require('mongoose'),
-	connString: "mongodb://nvh_user:123456@ds131511.mlab.com:31511/nvh_test",
+	// Connection string to MongoDB server
+	// mlab.com account:
+	// + Username:  quocbao
+	// + Password:  32jJrkxwc&7F74#
+	// DB name:     simple-api-server
+	// DB username: quocbao
+	// DB password: Gz$3@RHtGR572S2
+	connString: 'mongodb://quocbao:Gz$3@RHtGR572S2@ds127101.mlab.com:27101/simple-api-server',
+	//connString: '"'mongodb://<dbuser>:<dbpassword>@ds127101.mlab.com:27101/simple-api-server',
+
 
 	connect: function()
 	{
