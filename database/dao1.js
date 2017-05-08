@@ -120,16 +120,20 @@ var dao = {
 		// Select all comment belong to splug, skip the first startComment comment,
 		// don't take more then sizeDisComm comment
 		this.Comment.find({'slug': slug})
+		.sort({_id:-1})
 		.skip(parseInt(startComment, 10))
 		.limit(parseInt(sizeDisComm))
 		.exec(function(err, data)
 		{
 			if (err) throw err;
 
-			// Return data as a callback function
-			// data.length is the total of extracted comments
-			//console.log(data.length);
-			callback({total: data.length, comments: data});
+			dao.Comment.find({'slug': slug}).exec(function(err, comments){
+				// Return data as a callback function
+				// data.length is the total of extracted comments
+				console.log(comments);
+				callback({total: comments.length, "comments": data});
+			});
+
 		});
 	},
 
