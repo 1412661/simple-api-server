@@ -143,7 +143,32 @@ var dao = {
 	*	out: 	none
 	*/
 	addComment: function(slug, comment, callback){
-		callback();
+		var CommentSchema = new this.mongoose.Schema({
+			slug: String,
+			pathAvatar: String,
+			username: String,
+			datePost: String,
+			content: String
+		});
+
+		if (!this.Comment)
+			this.Comment = this.mongoose.model('Comment', CommentSchema);
+
+		var date = new Date();
+		var strDate = date.getHours() + ":" + date.getMinutes() + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getYear();
+
+		var data = {
+			"slug": slug,
+			pathAvatar: "/images/avatar.jpg",
+			username: "Customer",
+			datePost: strDate,
+			content: comment
+		};
+
+		this.Comment(data).save(function(err){
+			if(err) throw err;
+			callback();
+		});
 	},
 
 
