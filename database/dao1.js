@@ -120,6 +120,31 @@ var dao = {
 			{id: 1, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:01 05/05/2017", content: "This is good article"},
 			{id: 2, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:02 05/05/2017", content: "This is good article"}
 		]});
+	},
+
+	/*
+	*	Thêm comment vào database
+	*	in: 	slug 		(string) 	-> Phần slug đường dẫn trang comment
+	*	in: 	comment 	(String) 	-> Nội dung bình luận
+	*	in: 	callback 	(function) 	-> hàm phải được gọi khi hết tiến trình
+	*										callback được không tham số.
+	*										callback();
+	*	out: 	none
+	*/
+	addComment: function(slug, comment, callback){
+		callback();
+	},
+	/*
+	*	Xóa comment database
+	*	in: 	slug: 		(string) 	-> Phần slug đường dẫn trang comment
+	*	in: 	idComment: 	(int) 		-> id bình luận
+	*	in: 	callback 	(function) 	-> hàm phải được gọi khi hết tiến trình
+	*										callback được không tham số.
+	*										callback();
+	*	out: none
+	*/
+	deleteComment: function(slug, idComment, callback){
+		callback();
 	}
 
 };
