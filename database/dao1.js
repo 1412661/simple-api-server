@@ -105,7 +105,6 @@ var dao = {
 	*/
 	getComment: function(slug, startComment, sizeDisComm, callback){
 		var CommentSchema = new this.mongoose.Schema({
-			id: Number,
 			slug: String,
 			pathAvatar: String,
 			username: String,
@@ -117,11 +116,13 @@ var dao = {
 			this.Comment = this.mongoose.model('Comment', CommentSchema);
 		//console.log(sizeDisComm);
 		//console.log(startComment);
-		console.log(slug);
 
-		// Select all comment that id >= startComment, don't take more then sizeDisComm comment
-		this.Comment.find({'slug': slug}).where('id').gt(startComment-1).limit(sizeDisComm).exec(function(err, data)
-		//this.Comment.find({'slug': slug}).exec(function(err, data)
+		// Select all comment belong to splug, skip the first startComment comment,
+		// don't take more then sizeDisComm comment
+		this.Comment.find({'slug': slug})
+		.skip(parseInt(startComment, 10))
+		.limit(parseInt(sizeDisComm))
+		.exec(function(err, data)
 		{
 			if (err) throw err;
 
