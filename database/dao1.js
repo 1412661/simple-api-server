@@ -101,19 +101,14 @@ var dao = {
 	getService: function(slug, callback) {
 		var sample = {slug: "design", title: "Design Research", pathImg: "/images/design.jpg", detail: "We help you better understand the needs and goals of your customers, uncovering key insighs that drive innovative design ideas" };
 
-		console.log(sample);
+		console.log(typeof(sample));
 		this.Page.find({'slug': slug}, function(err, data)
 		{
 			if (err) throw err;
 			//callback(data[0])
-			console.log(JSON.parse(data));
+			console.log(data[0]);
+			return data[0];
 		});
-
-		return sample;
-
-
-
-		//return null;*/
 	},
 
 	/*

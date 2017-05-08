@@ -14,28 +14,21 @@ module.exports = function(app) {
 		dao.connect();
 
 		var dataService = dao.getService(req.params.slug);
-		if (dataService == null){
-			res.writeHead(404, {"Content-Type": "text/html"});
-			res.end();
-		}
-
 		var comments = dao.getComment(req.params.slug, startComment, countComment);
-		if (comments == null){
+
+		if (dataService == null || comments == null){
 			res.writeHead(404, {"Content-Type": "text/html"});
 			res.end();
-		}
+			console.log('[WARN] Service or Comments is NULL');
+		} else
+			res.render('service', {dataService: dataService, comments: comments, posComment: {start: startComment, countComment: countComment}});
 
-
-
-		res.render('service', {dataService: dataService, comments: comments, posComment: {start: startComment, countComment: countComment}});
 		// Close connection to MongoDB server
 		dao.close();
 	});
-
 
 	app.get('*', function(req, res){
 		res.writeHead(404, {"Content-Type": "text/html"});
 		res.end();
 	});
-
 }
