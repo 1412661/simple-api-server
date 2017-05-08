@@ -128,7 +128,7 @@ var dao = {
 
 			// Return data as a callback function
 			// data.length is the total of extracted comments
-			console.log(data.length);
+			//console.log(data.length);
 			callback({total: data.length, comments: data});
 		});
 	},
@@ -157,9 +157,24 @@ var dao = {
 	*	out: none
 	*/
 	deleteComment: function(slug, idComment, callback){
-		callback();
-	}
+		/*var CommentSchema = new this.mongoose.Schema({
+			_id: String,
+			slug: String
+		});
 
+		if (!this.Comment)
+			this.Comment = this.mongoose.model('Comment', CommentSchema);
+		*/
+		// We don't need to load this model of Comment because getComment() already load it first
+		this.Comment.find()
+		.where('_id').equals(idComment)
+		.where('slug').equals(slug)
+		.remove().exec(function(err, data) {
+			//console.log(slug);
+			//console.log(idComment);
+			callback();
+		});
+	}
 };
 
 module.exports = dao;
