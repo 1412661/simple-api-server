@@ -29,15 +29,22 @@ var dao = {
 			pathImg: String,
 			detail: String
 		});
-		this.Page = this.mongoose.model('Page', PageSchema);
+
+		// Singleton design pattern
+		if (!this.Page)
+			this.Page = this.mongoose.model('Page', PageSchema);
 
 		var CommentSchema = new this.mongoose.Schema({
-			id : Number,
+			id: Number,
 			pathAvatar: String,
 			username: String,
 			datePost: String,
-			content: String});
-		this.Comment = this.mongoose.model('Comment', CommentSchema);
+			content: String
+		});
+
+		// Singleton design pattern
+		if (!this.Comment)
+			this.Comment = this.mongoose.model('Comment', CommentSchema);
 	},
 
 	close: function()
@@ -91,13 +98,22 @@ var dao = {
 	*	out: {slug:String, title: String, pathImg: String, detail: String}
 	*	out - return null nếu không có kết quả
 	*/
-	getService: function(slug, callback){
+	getService: function(slug, callback) {
+		var sample = {slug: "design", title: "Design Research", pathImg: "/images/design.jpg", detail: "We help you better understand the needs and goals of your customers, uncovering key insighs that drive innovative design ideas" };
+
+		console.log(sample);
 		this.Page.find({'slug': slug}, function(err, data)
 		{
 			if (err) throw err;
-			callback(data[0])
+			//callback(data[0])
+			console.log(JSON.parse(data));
 		});
-		//return {slug: "design", title: "Design Research", pathImg: "/images/design.jpg", detail: "We help you better understand the needs and goals of your customers, uncovering key insighs that drive innovative design ideas" };
+
+		return sample;
+
+
+
+		//return null;*/
 	},
 
 	/*
