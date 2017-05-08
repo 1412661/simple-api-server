@@ -14,15 +14,10 @@ module.exports = function(app) {
 		dao.connect(function()
 		{
 			dao.getService(req.params.slug, function(dataService){
-					dao.getComment(req.params.slug, startComment, countComment, function(comments){
-						if (dataService == null || comments == null){
-							res.writeHead(404, {"Content-Type": "text/html"});
-							res.end();
-							console.log('[WARN] Service or Comments is NULL');
-						} else
-							res.render('service', {dataService: dataService, comments: comments, posComment: {start: startComment, countComment: countComment}});
-						dao.close();
-					});
+				dao.getComment(req.params.slug, startComment, countComment, function(comments){
+					res.render('service', {dataService: dataService, comments: comments, posComment: {start: startComment, countComment: countComment}});
+					dao.close();
+				});
 			});
 		});
 	});
@@ -32,7 +27,7 @@ module.exports = function(app) {
 		res.end();
 	});
 
-		app.post('/add/comment/:slug', function(req, res){
+	app.post('/add/comment/:slug', function(req, res){
 		var slug = req.params.slug;
 		var comment = req.body.comment;
 		dao.addComment(slug, comment, function(){
@@ -47,7 +42,8 @@ module.exports = function(app) {
 		var idComment = req.params.idComment;
 		dao.deleteComment(slug, idComment, function(){
 			console.log("Delete comment: " + idComment + " in slug: " + slug);
-			res.redirect('/service/'+slug);
+			// We don't need to redirect (to reload the page). JS code in HTML will do it
+			//res.redirect('/service/'+slug);
 		});
 	});
 
