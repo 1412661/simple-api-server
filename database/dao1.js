@@ -104,9 +104,9 @@ var dao = {
 	*	out - return null nếu không có kết quả
 	*/
 	getComment: function(slug, startComment, sizeDisComm, callback){
-
 		var CommentSchema = new this.mongoose.Schema({
 			id: Number,
+			slug: String,
 			pathAvatar: String,
 			username: String,
 			datePost: String,
@@ -117,9 +117,11 @@ var dao = {
 			this.Comment = this.mongoose.model('Comment', CommentSchema);
 		//console.log(sizeDisComm);
 		//console.log(startComment);
+		console.log(slug);
 
 		// Select all comment that id >= startComment, don't take more then sizeDisComm comment
-		this.Comment.find().where('id').gt(startComment-1).limit(sizeDisComm).exec(function(err, data)
+		this.Comment.find({'slug': slug}).where('id').gt(startComment-1).limit(sizeDisComm).exec(function(err, data)
+		//this.Comment.find({'slug': slug}).exec(function(err, data)
 		{
 			if (err) throw err;
 
@@ -142,6 +144,8 @@ var dao = {
 	addComment: function(slug, comment, callback){
 		callback();
 	},
+
+
 	/*
 	*	Xóa comment database
 	*	in: 	slug: 		(string) 	-> Phần slug đường dẫn trang comment
