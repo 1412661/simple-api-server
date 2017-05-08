@@ -24,17 +24,6 @@ var dao = {
 			// After connect to DB, then execute any others
 			callback();
 		});
-
-			/*var CommentSchema = new this.mongoose.Schema({
-				id: Number,
-				pathAvatar: String,
-				username: String,
-				datePost: String,
-				content: String
-			});
-
-			if (!this.Comment)
-				this.Comment = this.mongoose.model('Comment', CommentSchema);*/
 	},
 
 	close: function()
@@ -115,6 +104,27 @@ var dao = {
 	*	out - return null nếu không có kết quả
 	*/
 	getComment: function(slug, startComment, sizeDisComm, callback){
+
+		/*var CommentSchema = new this.mongoose.Schema({
+			id: Number,
+			pathAvatar: String,
+			username: String,
+			datePost: String,
+			content: String
+		});
+
+		if (!this.Comment)
+			this.Comment = this.mongoose.model('Comment', CommentSchema);
+
+		this.Page.find({'slug': slug}, function(err, data)
+		{
+			if (err) throw err;
+
+			// Return data as a callback function
+			console.log(data[0]);
+			callback(data[0]);
+		});*/
+
 		callback({total: 20, comments: [
 			{id: 0, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:00 05/05/2017", content: "This is good article"},
 			{id: 1, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:01 05/05/2017", content: "This is good article"},
