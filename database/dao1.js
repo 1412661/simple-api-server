@@ -13,38 +13,28 @@ var dao = {
 	dbPass: 'NX6cN2f55Mvaxrk',
 	connString: 'mongodb://quocbao:NX6cN2f55Mvaxrk@ds127101.mlab.com:27101/simple-api-server',
 
-	connect: function()
+	connect: function(callback)
 	{
 		console.log('[INFO] Connecting to database. Please wait ...');
 		this.mongoose.connect(this.connString);
-
 		this.mongoose.connection.on('error', console.error.bind(console, 'Error when connection to MongoDB:'));
 		this.mongoose.connection.once('open', function(){
 			console.log('[INFO] Connected to MongoDB simple-api-server with user quocbao');
+
+			// After connect to DB, then execute any others
+			callback();
 		});
 
-		var PageSchema = new this.mongoose.Schema({
-			slug : String,
-			title: String,
-			pathImg: String,
-			detail: String
-		});
+			/*var CommentSchema = new this.mongoose.Schema({
+				id: Number,
+				pathAvatar: String,
+				username: String,
+				datePost: String,
+				content: String
+			});
 
-		// Singleton design pattern
-		if (!this.Page)
-			this.Page = this.mongoose.model('Page', PageSchema);
-
-		var CommentSchema = new this.mongoose.Schema({
-			id: Number,
-			pathAvatar: String,
-			username: String,
-			datePost: String,
-			content: String
-		});
-
-		// Singleton design pattern
-		if (!this.Comment)
-			this.Comment = this.mongoose.model('Comment', CommentSchema);
+			if (!this.Comment)
+				this.Comment = this.mongoose.model('Comment', CommentSchema);*/
 	},
 
 	close: function()
@@ -90,24 +80,30 @@ var dao = {
 		});
 	},
 
-
-	/* input the required method from controler*/
-
 	/*
 	*	in - slug: primary key của bảng services
-	*	out: {slug:String, title: String, pathImg: String, detail: String}
-	*	out - return null nếu không có kết quả
+	*	in - callback: callback function to retrun data as a object
 	*/
 	getService: function(slug, callback) {
-		var sample = {slug: "design", title: "Design Research", pathImg: "/images/design.jpg", detail: "We help you better understand the needs and goals of your customers, uncovering key insighs that drive innovative design ideas" };
+		// DB structure for a service
+		var PageSchema = new this.mongoose.Schema({
+			slug : String,
+			title: String,
+			pathImg: String,
+			detail: String
+		});
 
-		console.log(typeof(sample));
+		// Prevent recreating a singleton
+		if (!this.Page)
+			this.Page = this.mongoose.model('page', PageSchema);
+
 		this.Page.find({'slug': slug}, function(err, data)
 		{
 			if (err) throw err;
-			//callback(data[0])
+
+			// Return data as a callback function
 			console.log(data[0]);
-			return data[0];
+			callback(data[0]);
 		});
 	},
 
@@ -118,12 +114,12 @@ var dao = {
 	*		{id:String, pathAvatar: String, username: String, datePost: String, content:String}]}
 	*	out - return null nếu không có kết quả
 	*/
-	getComment: function(slug, startComment, sizeDisComm){
-		return {total: 20, comments: [
+	getComment: function(slug, startComment, sizeDisComm, callback){
+		callback({total: 20, comments: [
 			{id: 0, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:00 05/05/2017", content: "This is good article"},
 			{id: 1, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:01 05/05/2017", content: "This is good article"},
 			{id: 2, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:02 05/05/2017", content: "This is good article"}
-		]};
+		]});
 	}
 
 };
