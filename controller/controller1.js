@@ -29,19 +29,13 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('*', function(req, res){
-		res.writeHead(404, {"Content-Type": "text/html"});
-		res.end();
-	});
-
-		app.post('/add/comment/:slug', function(req, res){
+	app.post('/add/comment/:slug', function(req, res){
 		var slug = req.params.slug;
 		var comment = req.body.comment;
 		dao.addComment(slug, comment, function(){
 			console.log("Comment:" + comment);
 			res.redirect('/service/'+slug);
 		});
-		
 	});
 
 	app.delete('/delete/comment/:slug/:idComment', function(req, res){
@@ -53,4 +47,9 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('*', function(req, res){
+		res.writeHead(404, {"Content-Type": "text/html"});
+		res.end();
+	});
+	
 }
