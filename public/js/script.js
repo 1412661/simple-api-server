@@ -10,6 +10,7 @@ $(document).ready(function(){
 		function(data, status){
 			console.log(status);
 		});
+		document.location = "";
 	});
 
 	$('.comment-detail .delete').click(function(){
