@@ -4,6 +4,8 @@
 	<meta charset="utf-8">
 	<title>Nhóm 10 - 1412170 - 1412209 - 1412661</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<script type="text/javascript" src="/js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="/js/script.js"></script>
 </head>
 <body class="services">
 	<div class="container">
@@ -41,13 +43,13 @@
 		<div id="comment">
 			<h2>Bình luận</h2>
 			<div class="count-comment"><span><%= comments.total %> bình luận</span></div>
-			<form class="comment-box" action="/comment" method="post">
+			<div id="form-comment">
 				<textarea name="comment" placeholder="Add a comment..."></textarea>
 				<div class="group-submit">
 					<img class="avatar" src="/images/avatar.jpg"/>
-					<input type="submit" value="comment">
+					<input type="submit" value="comment" id="comment-submit" data-slug="<%= dataService.slug %>">
 				</div>
-			</form>
+			</div>
 			<% comments.comments.forEach(function(item){ %>
 				<div class="comment-detail">
 					<img class="avatar" src="<%= item.pathAvatar %>"/>
@@ -55,7 +57,7 @@
 					<span class="time-post"><%= item.datePost %></span>
 					<p><%= item.content %></p>
 					<div class="overflow">
-						<div class="delete" data-id="<%= item.id %>">X</div>
+						<div class="delete" data-id="<%= item.id %>" data-slug="<%= dataService.slug %>">X</div>
 					</div>
 				</div>
 			<% }); %>
