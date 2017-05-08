@@ -15,8 +15,6 @@ module.exports = function(app) {
 		{
 			dao.getService(req.params.slug, function(dataService){
 					dao.getComment(req.params.slug, startComment, countComment, function(comments){
-						console.log(typeof(dataService));
-						console.log(typeof(comments));
 						if (dataService == null || comments == null){
 							res.writeHead(404, {"Content-Type": "text/html"});
 							res.end();
@@ -41,7 +39,7 @@ module.exports = function(app) {
 			console.log("Comment:" + comment);
 			res.redirect('/service/'+slug);
 		});
-		
+
 	});
 
 	app.delete('/delete/comment/:slug/:idComment', function(req, res){

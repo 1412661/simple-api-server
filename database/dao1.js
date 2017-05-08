@@ -91,7 +91,7 @@ var dao = {
 			if (err) throw err;
 
 			// Return data as a callback function
-			console.log(data[0]);
+			//console.log(data[0]);
 			callback(data[0]);
 		});
 	},
@@ -105,7 +105,7 @@ var dao = {
 	*/
 	getComment: function(slug, startComment, sizeDisComm, callback){
 
-		/*var CommentSchema = new this.mongoose.Schema({
+		var CommentSchema = new this.mongoose.Schema({
 			id: Number,
 			pathAvatar: String,
 			username: String,
@@ -115,21 +115,19 @@ var dao = {
 
 		if (!this.Comment)
 			this.Comment = this.mongoose.model('Comment', CommentSchema);
+		//console.log(sizeDisComm);
+		//console.log(startComment);
 
-		this.Page.find({'slug': slug}, function(err, data)
+		// Select all comment that id >= startComment, don't take more then sizeDisComm comment
+		this.Comment.find().where('id').gt(startComment-1).limit(sizeDisComm).exec(function(err, data)
 		{
 			if (err) throw err;
 
 			// Return data as a callback function
-			console.log(data[0]);
-			callback(data[0]);
-		});*/
-
-		callback({total: 20, comments: [
-			{id: 0, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:00 05/05/2017", content: "This is good article"},
-			{id: 1, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:01 05/05/2017", content: "This is good article"},
-			{id: 2, pathAvatar: "/images/avatar.jpg", username: "Nhóm 10", datePost: "20:02 05/05/2017", content: "This is good article"}
-		]});
+			// data.length is the total of extracted comments
+			console.log(data.length);
+			callback({total: data.length, comments: data});
+		});
 	},
 
 	/*
